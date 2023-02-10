@@ -1,54 +1,33 @@
 import React from 'react';
+import {useState, useEffect} from "react";
 
-class Facts extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            counter: 0,
-        };
-        this.tick = this.tick.bind(this);
-    }
+const Facts1 = (props) => {
+    const factsData = props.factsData;
+    const factsList = factsData.map((value) => <h2 key={value.toString()}>{value}</h2>);
+    const [counter, setCounter] = useState(0);
 
-    componentDidMount() {
-        this.timerID = setInterval(
-            () => this.tick(), 3000
-        );
-    }
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            tick();
+        }, 3000);
+        return () => clearTimeout(timer);
+    });
 
-    componentWillUnmount() {
-        clearInterval(this.timerID);
-    }
-
-    tick() {
-        this.setState(
-            function () {
-                return {
-                    counter: this.state.counter + 1,
-                }
-            }
-        );
-        if (this.state.counter > this.props.factsData.length - 2) {
-            this.setState(
-                function () {
-                    return {
-                        counter: 0,
-                    }
-                }
-            )
+    const tick = () => {
+        if (counter > factsData.length - 2) {
+            return setCounter(0);
         }
-    }
+        return setCounter(counter + 1);
+    };
 
-    render() {
-        const factsData = this.props.factsData;
-        const factsList = factsData.map((value) => <h2 key={value.toString()}>{value}</h2>);
-        return (
+    return (
+        <div>
             <div>
-                <div>
-                    {factsList[this.state.counter]}
-                </div>
+                {factsList[counter]}
             </div>
-        )
-    }
-}
+        </div>
+    );
+};
 
-export default Facts;
+
+export default Facts1;
