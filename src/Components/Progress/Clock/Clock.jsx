@@ -1,73 +1,40 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
-class Clock extends React.Component {
-    constructor(props) {
-        super(props);
-        this.tick = this.tick.bind(this);
-        this.refreshStart = this.refreshStart.bind(this);
+const Clock1 = (props) => {
+    const start = props.clockData.start;
+    const finish = props.clockData.finish;
+    const pastTime = finish - start;
+    const pastDays = Math.floor(pastTime / (1000 * 60 * 60 * 24));
+    const pastHours = Math.floor(pastTime / (1000 * 60 * 60) - pastDays * 24);
+    const pastMinutes = Math.floor(pastTime / (1000 * 60) - (pastDays * 24 * 60 + pastHours * 60));
+    const pastSeconds = Math.floor(pastTime / 1000 - (pastDays * 24 * 60 * 60 + pastHours * 60 * 60 + pastMinutes * 60));
 
-    }
+    const tick = () => {
+        props.onFinishChange();
+    };
+    const refreshStart = () => {
+        props.onStartChange();
+    };
 
-    componentDidMount() {
-        this.timerID = setInterval(
-            () => this.tick(), 1000
-        );
-    }
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            tick();
+        }, 1000);
+        return () => clearTimeout(timer);
+    });
 
-    componentWillUnmount() {
-        clearInterval(this.timerID);
-    }
-
-    tick() {
-        this.props.onFinishChange()
-    }
-
-    refreshStart = () => {
-        this.props.onStartChange()
-    }
-
-    getPastTime(start, finish) {
-        return finish - start;
-    }
-
-    getDaysDiff(timeDiff) {
-        return Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    }
-
-    getHoursDiff(timeDiff) {
-        return Math.floor(timeDiff / (1000 * 60 * 60) - this.getDaysDiff(timeDiff) * 24);
-    }
-
-    getMinutesDiff(timeDiff) {
-        return Math.floor(timeDiff / (1000 * 60) - (this.getDaysDiff(timeDiff) * 24 * 60 + this.getHoursDiff(timeDiff) * 60));
-    }
-
-    getSecondsDiff(timeDiff) {
-        return Math.floor(timeDiff / 1000 - (this.getDaysDiff(timeDiff) * 24 * 60 * 60 + this.getHoursDiff(timeDiff) * 60 * 60 + this.getMinutesDiff(timeDiff) * 60));
-    }
-
-    render() {
-        return (
+    return (
+        <div>
+            <code>
+                {pastDays} days {pastHours} hours {pastMinutes} minutes and {pastSeconds} seconds have passed
+            </code>
             <div>
-                <code>{
-                    `${this.getDaysDiff(this.getPastTime(this.props.clockData.start, this.props.clockData.finish))} days, 
-                     ${this.getHoursDiff(this.getPastTime(this.props.clockData.start, this.props.clockData.finish))} hours,
-                     ${this.getMinutesDiff(this.getPastTime(this.props.clockData.start, this.props.clockData.finish))} minutes,
-                     ${this.getSecondsDiff(this.getPastTime(this.props.clockData.start, this.props.clockData.finish))} seconds.
-                    `
-                }
-                </code>
-                {this.getDaysDiff(this.getPastTime(this.props.clockData.start, this.props.clockData.finish)) ?
-                    <h2>Good job! Just go ahead!</h2> :
-                    <h2>There's not much left! keep going on!</h2>
-                }
-
-                <button onClick={this.refreshStart}>
+                <button onClick={refreshStart}>
                     Quit smoking
                 </button>
             </div>
-        )
-    }
-}
+        </div>
+    );
+};
 
-export default Clock;
+export default Clock1;

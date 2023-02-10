@@ -1,8 +1,8 @@
 import './App.css';
 import React from "react";
-import Facts from "./Components/Facts/Facts";
 import Profile from "./Components/Profile/Profile";
 import Progress from "./Components/Progress/Progress";
+import Facts from "./Components/Facts/Facts";
 
 const data = {
     factsData: [

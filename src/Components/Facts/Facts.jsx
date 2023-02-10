@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from "react";
 
-const Facts1 = (props) => {
+const Facts = (props) => {
     const factsData = props.factsData;
     const factsList = factsData.map((value) => <h2 key={value.toString()}>{value}</h2>);
     const [counter, setCounter] = useState(0);
@@ -30,4 +30,4 @@ const Facts1 = (props) => {
 };
 
 
-export default Facts1;
+export default Facts;

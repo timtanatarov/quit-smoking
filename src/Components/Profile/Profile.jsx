@@ -33,14 +33,14 @@ class Profile extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         <h1>
-                            Давайте знакомиться :)
+                            Lets get know each other?
                         </h1>
                         <input type="text" value={this.state.value} onChange={this.handleChange}
-                               placeholder='Как Вас зовут?'/>
+                               placeholder='What is your name?'/>
                     </label>
                     <div>
                         <button onClick={this.assignName}>
-                            Отправить!
+                            Send
                         </button>
                     </div>
                 </form>
@@ -48,9 +48,9 @@ class Profile extends React.Component {
         }
         if (this.state.hasName) {
             return (
-                <div>
-                    Здравствуйте, {` ${this.state.value}`}
-                </div>
+                <h1>
+                    Hello, {` ${this.state.value}`}
+                </h1>
             )
         }
     }
