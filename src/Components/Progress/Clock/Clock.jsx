@@ -1,14 +1,15 @@
 import React, {useEffect} from 'react';
 
-const Clock1 = (props) => {
-    const start = props.clockData.start;
-    const finish = props.clockData.finish;
+const Clock = (props) => {
+    const start = props.start;
+    const finish = props.finish;
     const pastTime = finish - start;
     const pastDays = Math.floor(pastTime / (1000 * 60 * 60 * 24));
     const pastHours = Math.floor(pastTime / (1000 * 60 * 60) - pastDays * 24);
     const pastMinutes = Math.floor(pastTime / (1000 * 60) - (pastDays * 24 * 60 + pastHours * 60));
     const pastSeconds = Math.floor(pastTime / 1000 - (pastDays * 24 * 60 * 60 + pastHours * 60 * 60 + pastMinutes * 60));
 
+    // debugger;
     const tick = () => {
         props.onFinishChange();
     };
@@ -37,4 +38,4 @@ const Clock1 = (props) => {
     );
 };
 
-export default Clock1;
+export default Clock;

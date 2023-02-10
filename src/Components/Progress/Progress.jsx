@@ -1,39 +1,42 @@
-import React from "react";
+import React, {useState} from "react";
 import Clock from "./Clock/Clock";
+import Life from "./Life/Life";
 
-class Progress extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            start: new Date(2022, 12, 3, 11, 26, 0),
-            finish: new Date(),
-        }
-        this.handleStartChange = this.handleStartChange.bind(this);
-        this.handleFinishChange = this.handleFinishChange.bind(this);
-    }
+const Progress = (props) => {
+    const [start, setStart] = useState(new Date(2022, 12, 3, 11, 26, 0),);
+    const [finish, setFinish] = useState(new Date());
+    const [smokedCigarettes, setSmokedCigarettes] = useState(6);
+    const [boxPrice, setBoxPrices] = useState(200);
+    const [cigarettesInBox, setCigarettesInBox] = useState(20);
 
-    handleStartChange(){
-        this.setState({
-            start: new Date(),
-        })
-    }
+    const handleStartChange = () => {
+        setStart(new Date());
+    };
 
-    handleFinishChange(){
-        this.setState({
-            finish: new Date(),
-        })
-    }
+    const handleFinishChange = () => {
+        setFinish(new Date());
+    };
 
-    render() {
-        return (
-            <div>
-                <h1>
-                    Your progress:
-                </h1>
-                <Clock clockData={this.state} onFinishChange={this.handleFinishChange} onStartChange={this.handleStartChange}/>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <p>Условно пачка стоит 200 руб, в пачке 20 сиг, 6 сиг в день</p>
+            <h1>
+                Time:
+            </h1>
+            <Clock start={start} finish={finish} onStartChange={handleStartChange} onFinishChange={handleFinishChange}/>
+            <h1>
+                Extended life:
+            </h1>
+            {smokedCigarettes * 15} minutes
+            <h1>
+                Money saved:
+            </h1>
+            {
+                (boxPrice / cigarettesInBox) * smokedCigarettes
+            } rubs
+        </div>
+
+    )
 }
 
 export default Progress;

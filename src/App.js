@@ -31,7 +31,7 @@ const App = () => {
             <fieldset>
                 <legend>
                     <h2>
-                        Facts
+                        Some facts for you today:
                     </h2>
                 </legend>
                 <Facts factsData={data.factsData}/>
