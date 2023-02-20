@@ -26,13 +26,13 @@ const Clock = (props) => {
 
     return (
         <div>
-            <code>
-                {pastDays} days {pastHours} hours {pastMinutes} minutes and {pastSeconds} seconds have passed
-            </code>
             <div>
-                <button onClick={refreshStart}>
-                    Quit smoking
-                </button>
+                {pastDays} days {pastHours} hours {pastMinutes} minutes and {pastSeconds} seconds have passed
+            </div>
+            <div>
+                {/*<button onClick={refreshStart}>*/}
+                {/*    Quit smoking*/}
+                {/*</button>*/}
             </div>
         </div>
     );

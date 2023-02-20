@@ -1,8 +1,9 @@
-import './App.css';
-import React from "react";
-import Profile from "./Components/Profile/Profile";
-import Progress from "./Components/Progress/Progress";
-import Facts from "./Components/Facts/Facts";
+import s from './App.module.css';
+import React, {useState} from "react";
+import UnauthorizedProfile from "./Components/Profile/UnauthorizedProfile";
+import Header from "./Components/Header/Header";
+import Main from "./Components/Main";
+import Homepage from "./Components/Homepage";
 
 const data = {
     factsData: [
@@ -18,34 +19,41 @@ const data = {
 }
 
 const App = () => {
-    return (
-        <div className="App">
-            <fieldset>
-                <legend>
-                    <h2>
-                        Profile
-                    </h2>
-                </legend>
-                <Profile/>
-            </fieldset>
-            <fieldset>
-                <legend>
-                    <h2>
-                        Some facts for you today:
-                    </h2>
-                </legend>
-                <Facts factsData={data.factsData}/>
-            </fieldset>
-            <fieldset>
-                <legend>
-                    <h2>
-                        Your progress
-                    </h2>
-                </legend>
-                <Progress/>
-            </fieldset>
-        </div>
-    );
+    const [value, setValue] = useState('');
+    const [hasName, setHasName] = useState(false);
+
+    const handleChange = (event) => {
+        setValue(event.target.value);
+    };
+    const handleSubmit = (event) => {
+        setValue(event.preventDefault());
+    };
+
+    const assignName = () => {
+        setHasName(true);
+    };
+    if (!hasName) {
+        return (
+            <div>
+                <UnauthorizedProfile value={value} hasName={hasName} onChange={handleChange} onSubmit={handleSubmit}
+                                     onAssigned={assignName}/>
+            </div>
+        );
+    }
+    if (hasName) {
+        return (
+            <div>
+                < Homepage value={value} factsData={data.factsData}/>
+            </div>
+        )
+    //     return (
+    //         <div>
+    //             <Header />
+    //             <Main />
+    //         </div>
+    //     );
+    }
+
 }
 
 export default App;
