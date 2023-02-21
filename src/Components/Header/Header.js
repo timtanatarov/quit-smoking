@@ -6,7 +6,9 @@ const Header = (props) => {
         <header>
             <nav>
                 <ul>
-                    <li><Link to='/Homepage'>Homepage</Link></li>
+                    <Link to='/homepage'>Homepage </Link>
+                    <Link to='/edit_goals'>Edit goals </Link>
+                    <Link to='/profile'>Profile </Link>
                 </ul>
             </nav>
         </header>

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import s from './UnauthorizedProfile.module.css'
+import s from './UnauthProfile.css'
 
-const unauthorizedProfile = (props) => {
+const unauthProfile = (props) => {
     return (
         <div className={s.mainContainer}>
             <form onSubmit={props.onSubmit}>
@@ -28,4 +28,4 @@ const unauthorizedProfile = (props) => {
     )
 };
 
-export default unauthorizedProfile;
+export default unauthProfile;

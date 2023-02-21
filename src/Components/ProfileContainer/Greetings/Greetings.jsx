@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import s from './Profile.module.css'
+import s from './Greetings.module.css'
 
-const Profile = (props) => {
+const Greetings = (props) => {
     return (
             <h1>
                 Good to see you, {` ${props.value}`}!
@@ -9,4 +9,4 @@ const Profile = (props) => {
         )
 };
 
-export default Profile;
+export default Greetings;
